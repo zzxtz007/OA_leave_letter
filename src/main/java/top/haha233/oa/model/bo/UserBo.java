@@ -1,6 +1,7 @@
 package top.haha233.oa.model.bo;
 
 import top.haha233.oa.model.po.DepartmentPo;
+import top.haha233.oa.model.po.RolePo;
 import top.haha233.oa.model.po.UserPo;
 
 import java.sql.Date;
@@ -35,7 +36,7 @@ public class UserBo {
 	/**
 	 * role_id	角色
 	 */
-	private UserPo roleId;
+	private RolePo roleId;
 	/**
 	 * last_login	最后登录时间
 	 */
@@ -106,11 +107,11 @@ public class UserBo {
 		this.departmentId = departmentId;
 	}
 
-	public UserPo getRoleId() {
+	public RolePo getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(UserPo roleId) {
+	public void setRoleId(RolePo roleId) {
 		this.roleId = roleId;
 	}
 

@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties/>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.haha233.oa.dal.DepartmentMapper">
+    <select id="query" resultType="top.haha233.oa.model.bo.DepartmentBo">
+        select *
+        from oa_leave_letter.department;
+    </select>
+</mapper>

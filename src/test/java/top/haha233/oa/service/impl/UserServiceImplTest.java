@@ -3,6 +3,9 @@ package top.haha233.oa.service.impl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import top.haha233.oa.service.UserService;
 
 /**
  * UserServiceImpl Tester.
@@ -26,7 +29,9 @@ public class UserServiceImplTest {
 	@Test
 	public void testLogin() throws Exception {
 //TODO: Test goes here...
-		System.out.println(new UserServiceImpl().login("1", "1", null));
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext("/spring/Spring-Dao.xml");
+        UserService us = (UserService) context.getBean("userService");
+		System.out.println(us.login("1", "1", null));
 
 	}
 

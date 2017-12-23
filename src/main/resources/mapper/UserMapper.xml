@@ -1,3 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties/>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.haha233.oa.dal.UserMapper">
+    <resultMap id="department" type="top.haha233.oa.model.po.DepartmentPo" autoMapping="true"/>
+    <resultMap id="rolePo" type="top.haha233.oa.model.po.RolePo" autoMapping="true"/>
+
+    <resultMap id="userMapper" type="top.haha233.oa.model.bo.UserBo" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <association property="departmentId" resultMap="department" columnPrefix="d_"
+                     javaType="top.haha233.oa.model.po.DepartmentPo"/>
+        <association property="roleId" resultMap="rolePo" columnPrefix="r_"
+                     javaType="top.haha233.oa.model.po.RolePo"/>
+    </resultMap>
+    <select id="query" resultMap="userMapper">
+        SELECT
+            u.id   id,
+            username,
+            u.name name,
+            password,
+            department_id,
+            role_id,
+            last_login,
+            r.id   r_id,
+            r.name r_name,
+            d.id   d_id,
+            d.name d_name
+        FROM oa_leave_letter.user u LEFT JOIN oa_leave_letter.role r
+                ON u.role_id = r.id
+            LEFT JOIN oa_leave_letter.department d
+                ON u.department_id = d.id
+        WHERE password = #{user.password} AND username = #{user.username}
+    </select>
+</mapper>

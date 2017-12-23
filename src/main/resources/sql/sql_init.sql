@@ -5,14 +5,14 @@
 # update_user	修改用户名
 # update_time	修改时间
 # is_deleted	删除标记
-CREATE TABLE `department` (
-  `id`          INT(10) PRIMARY KEY AUTO_INCREMENT,
-  `name`        VARCHAR(64) NOT NULL UNIQUE,
-  `insert_user` INT(10)     NOT NULL REFERENCES `user` (id),
-  `insert_time` DATETIME            DEFAULT now(),
-  `update_user` INT(10)     NOT NULL REFERENCES `user` (id),
-  `update_time` DATETIME            DEFAULT now(),
-  `is_deleted`  INT(1)              DEFAULT 0
+CREATE TABLE department (
+  id          INT(10) PRIMARY KEY AUTO_INCREMENT,
+  name        VARCHAR(64) NOT NULL UNIQUE,
+  insert_user INT(10)     NOT NULL REFERENCES user (id),
+  insert_time DATETIME            DEFAULT now(),
+  update_user INT(10)     NOT NULL REFERENCES user (id),
+  update_time DATETIME            DEFAULT now(),
+  is_deleted  INT(1)              DEFAULT 0
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -24,14 +24,14 @@ CREATE TABLE `department` (
 # update_user	修改用户名
 # update_time	修改时间
 # is_deleted	删除标记
-CREATE TABLE `role` (
-  `id`          INT(10) PRIMARY KEY AUTO_INCREMENT,
-  `name`        VARCHAR(64) UNIQUE NOT NULL,
-  `insert_user` INT(10)            NOT NULL REFERENCES `user` (id),
-  `insert_time` DATETIME            DEFAULT now(),
-  `update_user` INT(10)            NOT NULL REFERENCES `user` (id),
-  `update_time` DATETIME            DEFAULT now(),
-  `is_deleted`  INT(1)              DEFAULT 0
+CREATE TABLE role (
+  id          INT(10) PRIMARY KEY AUTO_INCREMENT,
+  name        VARCHAR(64) UNIQUE NOT NULL,
+  insert_user INT(10)            NOT NULL REFERENCES user (id),
+  insert_time DATETIME            DEFAULT now(),
+  update_user INT(10)            NOT NULL REFERENCES user (id),
+  update_time DATETIME            DEFAULT now(),
+  is_deleted  INT(1)              DEFAULT 0
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -48,19 +48,19 @@ CREATE TABLE `role` (
 # update_user	修改用户名
 # update_time	修改时间
 # is_deleted	删除标记
-CREATE TABLE `user` (
-  `id`            INT(10) PRIMARY KEY AUTO_INCREMENT,
-  `username`      VARCHAR(64) UNIQUE                 NOT NULL,
-  `NAME`          VARCHAR(64)                        NOT NULL,
-  `PASSWORD`      VARCHAR(64)                        NOT NULL,
-  `department_id` INT(10)                            NOT NULL REFERENCES `department` (id),
-  `role_id`       INT(10)                            NOT NULL REFERENCES `role` (id),
-  `last_login`    DATETIME DEFAULT CURRENT_TIMESTAMP NULL,
-  `insert_user`   INT(10)                            NOT NULL REFERENCES `user` (id),
-  `insert_time`   DATETIME            DEFAULT now(),
-  `update_user`   INT(10)                            NOT NULL REFERENCES `user` (id),
-  `update_time`   DATETIME            DEFAULT now(),
-  `is_deleted`    INT(1)              DEFAULT 0
+CREATE TABLE user (
+ id            INT(10) PRIMARY KEY AUTO_INCREMENT,
+ username      VARCHAR(64) UNIQUE                 NOT NULL,
+ NAME          VARCHAR(64)                        NOT NULL,
+ password      VARCHAR(64)                        NOT NULL,
+ department_id INT(10)                            NOT NULL REFERENCES department (id),
+ role_id       INT(10)                            NOT NULL REFERENCES role (id),
+ last_login    DATETIME DEFAULT CURRENT_TIMESTAMP NULL,
+ insert_user   INT(10)                            NOT NULL REFERENCES user (id),
+ insert_time   DATETIME            DEFAULT now(),
+ update_user   INT(10)                            NOT NULL REFERENCES user (id),
+ update_time   DATETIME            DEFAULT now(),
+ is_deleted    INT(1)              DEFAULT 0
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -78,21 +78,21 @@ CREATE TABLE `user` (
 # update_user	修改用户名
 # update_time	修改时间
 # is_deleted	删除标记
-CREATE TABLE `leave_letter`
+CREATE TABLE leave_letter
 (
-  `id`          INT(10) PRIMARY KEY   AUTO_INCREMENT,
-  `message`     VARCHAR(540) NOT NULL,
-  `user_id`     INT(10)      NOT NULL REFERENCES `user` (id),
-  `check_id`    INT(10)      NOT NULL REFERENCES `user` (id),
-  `STATUS`      INT(1)       NOT NULL DEFAULT 0,
-  `feedback`    VARCHAR(540) NOT NULL,
-  `start_time`  DATETIME     NOT NULL,
-  `end_time`    DATETIME     NOT NULL,
-  `insert_user` INT(10)      NOT NULL REFERENCES `user` (id),
-  `insert_time` DATETIME              DEFAULT now(),
-  `update_user` INT(10)      NOT NULL REFERENCES `user` (id),
-  `update_time` DATETIME              DEFAULT now(),
-  `is_deleted`  INT(1)                DEFAULT 0
+  id          INT(10) PRIMARY KEY   AUTO_INCREMENT,
+  message     VARCHAR(540) NOT NULL,
+  user_id     INT(10)      NOT NULL REFERENCES user (id),
+  check_id    INT(10)      NOT NULL REFERENCES user (id),
+  STATUS      INT(1)       NOT NULL DEFAULT 0,
+  feedback    VARCHAR(540) NOT NULL,
+  start_time  DATETIME     NOT NULL,
+  end_time    DATETIME     NOT NULL,
+  insert_user INT(10)      NOT NULL REFERENCES user (id),
+  insert_time DATETIME              DEFAULT now(),
+  update_user INT(10)      NOT NULL REFERENCES user (id),
+  update_time DATETIME              DEFAULT now(),
+  is_deleted  INT(1)                DEFAULT 0
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -104,14 +104,14 @@ CREATE TABLE `leave_letter`
 # update_user	修改用户名
 # update_time	修改时间
 # is_deleted	删除标记
-CREATE TABLE `notify` (
-  `id`          INT(10) PRIMARY KEY AUTO_INCREMENT,
-  `message`     VARCHAR(540) NOT NULL,
-  `insert_user` INT(10)      NOT NULL REFERENCES `user` (id),
-  `insert_time` DATETIME            DEFAULT now(),
-  `update_user` INT(10)      NOT NULL REFERENCES `user` (id),
-  `update_time` DATETIME            DEFAULT now(),
-  `is_deleted`  INT(1)              DEFAULT 0
+CREATE TABLE notify (
+  id          INT(10) PRIMARY KEY AUTO_INCREMENT,
+  message     VARCHAR(540) NOT NULL,
+  insert_user INT(10)      NOT NULL REFERENCES user (id),
+  insert_time DATETIME            DEFAULT now(),
+  update_user INT(10)      NOT NULL REFERENCES user (id),
+  update_time DATETIME            DEFAULT now(),
+  is_deleted  INT(1)              DEFAULT 0
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -124,15 +124,15 @@ CREATE TABLE `notify` (
 # update_user	修改用户名
 # update_time	修改时间
 # is_deleted	删除标记
-CREATE TABLE `notify_info` (
-  `id`            INT(10) PRIMARY KEY AUTO_INCREMENT,
-  `notify_id`     INT(10) NOT NULL REFERENCES `notify` (id),
-  `department_id` INT(10) NOT NULL REFERENCES `department` (id),
-  `insert_user`   INT(10) NOT NULL REFERENCES `user` (id),
-  `insert_time`   DATETIME            DEFAULT now(),
-  `update_user`   INT(10) NOT NULL REFERENCES `user` (id),
-  `update_time`   DATETIME            DEFAULT now(),
-  `is_deleted`    INT(1)              DEFAULT 0
+CREATE TABLE notify_info (
+  id            INT(10) PRIMARY KEY AUTO_INCREMENT,
+  notify_id     INT(10) NOT NULL REFERENCES notify (id),
+  department_id INT(10) NOT NULL REFERENCES department (id),
+  insert_user   INT(10) NOT NULL REFERENCES user (id),
+  insert_time   DATETIME            DEFAULT now(),
+  update_user   INT(10) NOT NULL REFERENCES user (id),
+  update_time   DATETIME            DEFAULT now(),
+  is_deleted    INT(1)              DEFAULT 0
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

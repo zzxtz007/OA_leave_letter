@@ -17,21 +17,21 @@ public interface DepartmentMapper {
 	 * @param department 部门模型
 	 * @return 操作返回值
 	 */
-	int insert(DepartmentPo department);
+	int insert(@Param("department")DepartmentPo department);
 
 	/**
 	 * 修改部门
 	 * @param department 部门模型
 	 * @return 操作返回值
 	 */
-	int update(DepartmentPo department);
+	int update(@Param("department")DepartmentPo department);
 
 	/**
 	 * 删除部门
 	 * @param department 部门模型
 	 * @return 操作返回值
 	 */
-	int delete(DepartmentPo department);
+	int delete(@Param("department")DepartmentPo department);
 
 	/**
 	 * 根据部门模型查询部门

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.haha233.oa.dal.LeaveLetterMapper">
+    <resultMap id="leaveLetter" type="top.haha233.oa.model.bo.LeaveLetterBo" autoMapping="true">
+        <association property="userId" columnPrefix="u_" autoMapping="true"
+                     javaType="top.haha233.oa.model.po.UserPo"/>
+        <association property="checkId" columnPrefix="c_" autoMapping="true"
+                     javaType="top.haha233.oa.model.po.UserPo"/>
+    </resultMap>
+    <select id="query" resultMap="leaveLetter">select
+  l.id id,
+  message,
+  user_id u_id,
+  check_id c_id,
+  STATUS,
+  feedback,
+  start_time,
+  end_time,
+  l.update_time,
+  l.is_deleted,
+  u.name u_name,
+  c.name c_name,
+  u.department_id
+from oa_leave_letter.leave_letter l LEFT JOIN oa_leave_letter.user u
+    ON l.user_id = u.id
+  LEFT JOIN oa_leave_letter.user c
+    ON l.check_id = c.id
+<include refid="generic-select"/>ORDER BY l.update_time
+    </select>
+    <sql id="generic-select">
+        <where>
+            <if test="leaveLetter.id!=null">
+                id=#{leaveLetter.id}
+            </if>
+            <if test="leaveLetter.message!=null and leaveLetter.message!=''">
+                AND message like "%"#{leaveLetter.message}"%"
+            </if>
+            <if test="leaveLetter.userId!=null">
+                AND user_id = #{leaveLetter.userId}
+            </if>
+            <if test="leaveLetter.checkId!=null">
+                AND check_id=#{leaveLetter.checkId}
+            </if>
+            <if test="leaveLetter.status!=null">
+                AND status=#{leaveLetter.status}
+            </if>
+            <if test="leaveLetter.feedback!=null">
+                AND feedback=#{leaveLetter.feedback}
+            </if>
+            <if test="leaveLetter.startTime!=null">
+                AND start_time=#{leaveLetter.startTime}
+            </if>
+            <if test="leaveLetter.endTime!=null">
+                AND end_time=#{leaveLetter.endTime}
+            </if>
+            <if test="leaveLetter.isDeleted!=null">
+                AND is_deleted=#{leaveLetter.isDeleted}
+            </if>
+        </where>
+    </sql>
+    <update id="update">
+        update oa_leave_letter.leave_letter
+        <set>
+            <if test="#{leaveLetter.message}!=null">
+                message=#{leaveLetter.message},
+            </if>
+            <if test="#{leaveLetter.userId}!=null">
+                user_id=#{leaveLetter.userId},
+            </if>
+            <if test="#{leaveLetter.checkId}!=null">
+                check_id=#{leaveLetter.checkId},
+            </if>
+            <if test="#{leaveLetter.status}!=null">
+                status=#{leaveLetter.status},
+            </if>
+            <if test="#{leaveLetter.feedback}!=null">
+                feedback=#{leaveLetter.feedback},
+            </if>
+            <if test="#{leaveLetter.startTime}!=null">
+                start_time=#{leaveLetter.startTime},
+            </if>
+            <if test="#{leaveLetter.endTime}!=null">
+                end_time=#{leaveLetter.endTime},
+            </if>
+            <if test="1==1">
+                update_user=#{updateUser},
+            </if>
+            <if test="1==1">
+                update_time=now(),
+            </if>
+        </set>
+        where id=#{leaveLetter.id}
+    </update>
+    <delete id="delete">
+        UPDATE oa_leave_letter.leave_letter
+        SET is_deleted = 1
+        WHERE id = #{leave_letter.id};
+    </delete>
+</mapper>
