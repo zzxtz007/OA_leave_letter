@@ -106,8 +106,8 @@ function checkPwdEvent() {
         $('.err-msg').text('密码不能为空');
         errStart();
         pwdFlag = false;
-    } else if (pwd.val().length < 8) {
-        $('.err-msg').text('密码不能长度不能小于8位');
+    } else if (pwd.val().length < 5) {
+        $('.err-msg').text('密码不能长度不能小于5位');
         errStart();
         pwdFlag = false;
     } else {

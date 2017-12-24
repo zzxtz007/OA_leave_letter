@@ -41,20 +41,19 @@ function closeSide() {
 
 /**
  * 查询页面信息
+ * 获取请假条数
  */
 function select() {
     $.ajax({
-        url: '',
+        url: 'leaveLetter/count',
         type: 'GET',
         data: {
-            pageNum: pageNum,
-            pageSize: 13,
-            isComplete: isComplete
+            status: isComplete
         }
     })
         .done(function (Response) {
             'use strict';
-            switch (Response.errCode) {
+            switch (Response.status) {
                 case 0:
                     addMessage(Response);
                     break;
@@ -63,9 +62,9 @@ function select() {
                     break;
             }
         })
-        .fail(function (t) {
+        .fail(function () {
             'use strict';
-
+            topErrMethod('#f00', '网络异常，请稍后再试');
         });
 }
 
@@ -74,7 +73,7 @@ function select() {
  * @param json 通过ajax获取到的json字符
  */
 function addMessage(json) {
-    var allMessageNum = json.allMessageNum;
+    var allMessageNum = json.count;
     var message = json.status;
 
     allPageNum = allMessageNum % 13 === 0 ? allMessageNum / 13 : allMessageNum / 13 + 1;

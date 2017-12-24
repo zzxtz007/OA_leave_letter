@@ -11,31 +11,39 @@
     </resultMap>
     <select id="query" resultMap="leaveLetter">
         select
-            l.id id,
-            message,
-            user_id u_id,
-            check_id c_id,
-            STATUS,
-            feedback,
-            start_time,
-            end_time,
-            l.update_time,
-            l.is_deleted,
-            u.name u_name,
-            c.name c_name,
-            u.department_id
-            from oa_leave_letter.leave_letter l LEFT JOIN oa_leave_letter.user u
-            ON l.user_id = u.id
-            LEFT JOIN oa_leave_letter.user c
-            ON l.check_id = c.id
+        l.id id,
+        message,
+        user_id u_id,
+        check_id c_id,
+        STATUS,
+        feedback,
+        start_time,
+        end_time,
+        l.update_time,
+        l.is_deleted,
+        u.name u_name,
+        c.name c_name,
+        u.department_id
+        from oa_leave_letter.leave_letter l LEFT JOIN oa_leave_letter.user u
+        ON l.user_id = u.id
+        LEFT JOIN oa_leave_letter.user c
+        ON l.check_id = c.id
         <include refid="generic-select"/>
-        ORDER BY  l.update_time DESC
-
+        ORDER BY l.update_time DESC
+    </select>
+    <select id="count">
+        select
+        count(l.id)
+        from oa_leave_letter.leave_letter l LEFT JOIN oa_leave_letter.user u
+        ON l.user_id = u.id
+        LEFT JOIN oa_leave_letter.user c
+        ON l.check_id = c.id
+        <include refid="generic-select"/>
     </select>
     <sql id="generic-select">
         <where>
             <if test="leaveLetter.id!=null">
-                id=#{leaveLetter.id}
+                l.id=#{leaveLetter.id}
             </if>
             <if test="leaveLetter.message!=null and leaveLetter.message!=''">
                 AND message like "%"#{leaveLetter.message}"%"

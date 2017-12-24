@@ -5,8 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import top.haha233.oa.model.po.LeaveLetterPo;
 import top.haha233.oa.service.LeaveLetterService;
+
+import java.util.Date;
 
 /**
  * LeaveLetterServiceImpl Tester.
@@ -15,9 +16,13 @@ import top.haha233.oa.service.LeaveLetterService;
  * @version 1.0
  */
 public class LeaveLetterServiceImplTest {
+	private AbstractXmlApplicationContext context;
+	private LeaveLetterService ls;
 
 	@Before
 	public void before() throws Exception {
+		context = new ClassPathXmlApplicationContext("/spring/Spring-Dao.xml");
+		ls = (LeaveLetterService) context.getBean("leaveLetterService");
 	}
 
 	@After
@@ -29,6 +34,8 @@ public class LeaveLetterServiceImplTest {
 	 */
 	@Test
 	public void testAddLeaveLetter() throws Exception {
+//		System.out.println(ls.addLeaveLetter(null, "我要请假", String.valueOf(new Date().getTime()),
+//				String.valueOf(new Date().getTime())));
 //TODO: Test goes here... 
 	}
 
@@ -38,9 +45,8 @@ public class LeaveLetterServiceImplTest {
 	@Test
 	public void testUpdateLeaveLetter() throws Exception {
 //TODO: Test goes here...
-		AbstractXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring/Spring-Dao.xml");
-		LeaveLetterService ls = (LeaveLetterService) context.getBean("leaveLetterService");
-		System.out.println(ls.updateLeaveLetter(null,"1","不行 滚！"));
+
+//		System.out.println(ls.query(null, "1", null));
 	}
 
 
