@@ -49,7 +49,7 @@ public class LeaveLetterDto {
 	/**
 	 * checkId 假条的状态
 	 */
-	private String status;
+	private Integer status;
 
 	/**
 	 * checkId 处理假条的信息
@@ -120,11 +120,11 @@ public class LeaveLetterDto {
 		this.checkName = checkName;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

@@ -9,25 +9,28 @@
         <association property="checkId" columnPrefix="c_" autoMapping="true"
                      javaType="top.haha233.oa.model.po.UserPo"/>
     </resultMap>
-    <select id="query" resultMap="leaveLetter">select
-  l.id id,
-  message,
-  user_id u_id,
-  check_id c_id,
-  STATUS,
-  feedback,
-  start_time,
-  end_time,
-  l.update_time,
-  l.is_deleted,
-  u.name u_name,
-  c.name c_name,
-  u.department_id
-from oa_leave_letter.leave_letter l LEFT JOIN oa_leave_letter.user u
-    ON l.user_id = u.id
-  LEFT JOIN oa_leave_letter.user c
-    ON l.check_id = c.id
-<include refid="generic-select"/>ORDER BY l.update_time
+    <select id="query" resultMap="leaveLetter">
+        select
+            l.id id,
+            message,
+            user_id u_id,
+            check_id c_id,
+            STATUS,
+            feedback,
+            start_time,
+            end_time,
+            l.update_time,
+            l.is_deleted,
+            u.name u_name,
+            c.name c_name,
+            u.department_id
+            from oa_leave_letter.leave_letter l LEFT JOIN oa_leave_letter.user u
+            ON l.user_id = u.id
+            LEFT JOIN oa_leave_letter.user c
+            ON l.check_id = c.id
+        <include refid="generic-select"/>
+        ORDER BY  l.update_time DESC
+
     </select>
     <sql id="generic-select">
         <where>
@@ -63,29 +66,29 @@ from oa_leave_letter.leave_letter l LEFT JOIN oa_leave_letter.user u
     <update id="update">
         update oa_leave_letter.leave_letter
         <set>
-            <if test="#{leaveLetter.message}!=null">
+            <if test="leaveLetter.message!=null">
                 message=#{leaveLetter.message},
             </if>
-            <if test="#{leaveLetter.userId}!=null">
+            <if test="leaveLetter.userId!=null">
                 user_id=#{leaveLetter.userId},
             </if>
-            <if test="#{leaveLetter.checkId}!=null">
+            <if test="leaveLetter.checkId!=null">
                 check_id=#{leaveLetter.checkId},
             </if>
-            <if test="#{leaveLetter.status}!=null">
+            <if test="leaveLetter.status!=null">
                 status=#{leaveLetter.status},
             </if>
-            <if test="#{leaveLetter.feedback}!=null">
+            <if test="leaveLetter.feedback!=null">
                 feedback=#{leaveLetter.feedback},
             </if>
-            <if test="#{leaveLetter.startTime}!=null">
+            <if test="leaveLetter.startTime!=null">
                 start_time=#{leaveLetter.startTime},
             </if>
-            <if test="#{leaveLetter.endTime}!=null">
+            <if test="leaveLetter.endTime!=null">
                 end_time=#{leaveLetter.endTime},
             </if>
             <if test="1==1">
-                update_user=#{updateUser},
+                update_user=#{leaveLetter.updateUser},
             </if>
             <if test="1==1">
                 update_time=now(),
@@ -98,4 +101,10 @@ from oa_leave_letter.leave_letter l LEFT JOIN oa_leave_letter.user u
         SET is_deleted = 1
         WHERE id = #{leave_letter.id};
     </delete>
+    <insert id="insert">
+        INSERT INTO leave_letter (message, user_id, check_id, feedback, start_time, end_time, insert_user, update_user)
+        VALUES (#{leaveLetter.message}, #{leaveLetter.userId}, #{leaveLetter.checkId},
+                #{leaveLetter.feedback}, #{leaveLetter.startTime}, #{leaveLetter.endTime},
+                #{leaveLetter.insertUser}, #{leaveLetter.updateUser});
+    </insert>
 </mapper>

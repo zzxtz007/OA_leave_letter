@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+}
+
+.side-nav {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    color: #FFF;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    z-index: 2;
+    background: rgba(50, 100, 255, 1);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.hidden-button {
+    position: absolute;
+    top: 40%;
+    left: -3.5%;
+    cursor: pointer;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    background: #DDD;
+}
+
+.hidden-button > .btn {
+    margin-left: 70%;
+    margin-top: 37%;
+    color: white;
+}
+
+.side-nav > .title-menu {
+    position: relative;
+    line-height: 40px;
+    border-bottom: 1px solid #FFF;
+    height: 40px;
+    font-size: 30px;
+}
+
+.title-menu > i {
+    position: absolute;
+    top: 17%;
+}
+
+.title-menu > div {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.side-function > ul li {
+    cursor: pointer;
+    list-style: none;
+    margin: 30px auto 10px;
+    width: 60%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-bottom: 1px solid #FFF;
+}
+
+.side-nav > .login-out {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.leave-letter-main {
+    display: inline-block;
+    font-size: 25px;
+    width: 100%;
+    height: 100%;
+}
+
+.mdui-tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 23.8%;
+    height: 2px;
+    width: 26.2%;
+    background-color: #3F51B5;
+}
+
+.leave-letter-main > .leave-letter-message {
+    margin: 20px auto 0;
+    width: 1020px;
+    background: #CCC;
+}
+
+.leave-letter-message tr:hover {
+    background: #CCC;
+}
+
+.leave-letter-message td{
+    text-align: center;
+}
+
+.leave-letter-message tr:hover td {
+    color: #FFF;
+}
+
+.leave-letter-message a{
+    cursor: pointer;
+}
+
+.leave-letter-message .pick-page-td{
+    display: flex;
+    -webkit-flex-wrap: wrap-reverse;
+    -ms-flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse;
+    justify-content: space-around;
+}
+
+.leave-letter-message tr:last-child td:last-child{
+    font-size: 8px;
+}
+
+.leave-letter-message tr:last-child td:last-child:hover{
+    background: #fff;
+    color: black;
+}
+
+.leave-letter-message .a-style{
+    padding: 10px;
+}
+
+.leave-letter-main > .detail-message{
+    position: absolute;
+    /*display: none;*/
+    width: 100%;
+    height: 1000px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+}
+
+.detail-message > .detail-message-body{
+    position: absolute;
+    text-align: center;
+    width: 500px;
+    top:40px;
+    left: 35%;
+    margin:auto ;
+    background: #FFF;
+}
+
+.detail-message-body td{
+    text-align: center;
+}

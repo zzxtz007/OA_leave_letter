@@ -25,7 +25,7 @@ public class CheckService {
 			}
 		} catch (Throwable throwable) {
 			throwable.printStackTrace();
-			return new Response(3);
+			return new Response(2);
 		}
 		return r;
 	}

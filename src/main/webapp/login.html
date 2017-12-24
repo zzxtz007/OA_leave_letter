@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/top-err.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/mdui/0.4.0/css/mdui.min.css">
+</head>
+<body>
+<div class="top-err">有错误</div>
+<div class="load-body">
+    <form class="load">
+        <div class="load-title">登录界面</div>
+        <div class="input-div">
+            <input type="text" title="用户名" class="userName elem" placeholder="用户名" spellcheck="false">
+            <input type="password" title="密码" class="password elem" placeholder="密码">
+        </div>
+        <div class="err-msg"></div>
+        <div class="btn-div">
+            <button type="submit" class="lgoin btn-style mdui-ripple mdui-ripple-white">登录</button>
+            <button type="reset" class="btn-style mdui-ripple mdui-ripple-white">重置</button>
+        </div>
+    </form>
+</div>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/mdui/0.4.0/js/mdui.min.js"></script>
+<script src="js/login.js"></script>
+<script src="js/check.js"></script>
+</body>
+</html>

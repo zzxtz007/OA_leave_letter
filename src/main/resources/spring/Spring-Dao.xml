@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
     <context:property-placeholder location="classpath:sql/databases.properties"/>
-    <context:component-scan base-package="top.haha233"/>
+    <context:component-scan base-package="top.haha233.oa.service"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${driver}"/>
