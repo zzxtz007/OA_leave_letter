@@ -1,5 +1,7 @@
 package top.haha233.oa.util;
 
+import top.haha233.oa.enums.StatusEnum;
+
 import java.util.HashMap;
 
 /**
@@ -13,7 +15,7 @@ public class Response extends HashMap<String, Object> {
      *
      * @param statusCode 状态码
      */
-    public Response(int statusCode) {
+    public Response(StatusEnum statusCode) {
         put("status", statusCode);
     }
 

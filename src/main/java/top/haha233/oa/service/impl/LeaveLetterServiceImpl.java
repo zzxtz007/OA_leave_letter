@@ -2,7 +2,9 @@ package top.haha233.oa.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.haha233.oa.dal.LeaveLetterMapper;
+import top.haha233.oa.enums.StatusEnum;
 import top.haha233.oa.model.bo.LeaveLetterBo;
 import top.haha233.oa.model.dto.LeaveLetterDto;
 import top.haha233.oa.model.po.LeaveLetterPo;
@@ -19,6 +21,7 @@ import java.util.List;
  * @author ICE_DOG
  */
 @Service("leaveLetterService")
+@Transactional(rollbackFor={Exception.class})
 public class LeaveLetterServiceImpl implements LeaveLetterService {
 	private final Long ROLE = 11L;
 	/**
@@ -39,12 +42,12 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 			String endTime) {
 		//确认是否登陆
 		if (!Tools.checkLogin(session)) {
-			return new Response(1);
+			return new Response(StatusEnum.NOT_LOGIN);
 		}
 		Long uid = (Long) Tools.getUid(session);
 		//2 传入值含有空值
 		if (uid == null || message == null || startTime == null || endTime == null) {
-			return new Response(2);
+			return new Response(StatusEnum.HAVE_NULL);
 		}
 		//3 类型转换错误
 		Long start;
@@ -53,7 +56,7 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 			start = Long.parseLong(startTime);
 			end = Long.parseLong(endTime);
 		} catch (Exception e) {
-			return new Response(3);
+			return new Response(StatusEnum.stateOf(3));
 		}
 		LeaveLetterPo letterPo = new LeaveLetterPo();
 		letterPo.setUserId(uid);
@@ -64,26 +67,26 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 		letterPo.setInsertUser(uid);
 		int ret = letterMapper.insert(letterPo);
 		System.out.println(ret);
-		return new Response(0);
+		return new Response(StatusEnum.stateOf(0));
 	}
 
 	@Override
 	public Response updateLeaveLetter(HttpSession session, String id, String feedback) {
 		//确认是否登陆
 		if (!Tools.checkLogin(session)) {
-			return new Response(1);
+			return new Response(StatusEnum.stateOf(1));
 		}
 		Long uid = (Long) Tools.getUid(session);
-		//2 传入值含有空值
+		//4 传入值含有空值
 		if (uid == null || feedback == null) {
-			return new Response(2);
+			return new Response(StatusEnum.HAVE_NULL);
 		}
 		//3 类型转换错误
 		Long letterId;
 		try {
 			letterId = Long.parseLong(id);
 		} catch (Exception e) {
-			return new Response(3);
+			return new Response(StatusEnum.stateOf(3));
 		}
 		LeaveLetterPo letterPo = new LeaveLetterPo();
 		letterPo.setId(letterId);
@@ -94,7 +97,7 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 		System.out.println(letterPo);
 		int ret = letterMapper.update(letterPo);
 		System.out.println(ret);
-		return new Response(0);
+		return new Response(StatusEnum.stateOf(0));
 	}
 
 	@Override
@@ -102,16 +105,16 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 			Integer count) {
 		//确认是否登陆
 		if (!Tools.checkLogin(session)) {
-			return new Response(1);
+			return new Response(StatusEnum.stateOf(1));
 		}
-		//2 判读是否为空
+		//4 判读是否为空
 		if (startIndex == null || count == null||status == null) {
-			return new Response(2);
+			return new Response(StatusEnum.stateOf(4));
 		}
 		//6 权限确认
 		Long roleId = (Long) Tools.getRid(session);
 		if (!roleId.equals(ROLE)) {
-			return new Response(6);
+			return new Response(StatusEnum.stateOf(6));
 		}
 		//3 类型转换错误
 		Long letterId = null;
@@ -119,14 +122,14 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 			try {
 				letterId = Long.parseLong(id);
 			} catch (Exception e) {
-				return new Response(3);
+				return new Response(StatusEnum.stateOf(3));
 			}
 		}
 		Integer sstatus ;
 		try {
 			sstatus = Integer.parseInt(status);
 		} catch (Exception e) {
-			return new Response(3);
+			return new Response(StatusEnum.stateOf(3));
 		}
 		LeaveLetterPo letterPo = new LeaveLetterPo();
 		letterPo.setId(letterId);
@@ -135,7 +138,7 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 		List<LeaveLetterBo> letterBos = letterMapper.query(letterPo, startIndex, count);
 		//5 传出数据为空
 		if (letterBos.size() == 0) {
-			return new Response(5);
+			return new Response(StatusEnum.stateOf(5));
 		}
 		List<LeaveLetterDto> letterDto = new ArrayList<>();
 		for (LeaveLetterBo letterBo : letterBos) {
@@ -163,23 +166,23 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 			letterDto.add(dto);
 		}
 		System.out.println(letterBos);
-		return new Response(0).add("dto", letterDto);
+		return new Response(StatusEnum.stateOf(0)).add("dto", letterDto);
 	}
 
 	@Override
 	public Response count(HttpSession session, String id, String status) {
 		//1 确认是否登陆
 		if (!Tools.checkLogin(session)) {
-			return new Response(1);
+			return new Response(StatusEnum.stateOf(1));
 		}
-		//2 是否为空
+		//4 是否为空
 		if (status == null) {
-			return new Response(2);
+			return new Response(StatusEnum.stateOf(4));
 		}
 		//6 权限确认
 		Long roleId = (Long) Tools.getRid(session);
 		if (!roleId.equals(ROLE)) {
-			return new Response(6);
+			return new Response(StatusEnum.stateOf(6));
 		}
 		//3 类型转换错误
 		Long letterId = null;
@@ -187,14 +190,14 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 			try {
 				letterId = Long.parseLong(id);
 			} catch (Exception e) {
-				return new Response(3);
+				return new Response(StatusEnum.stateOf(3));
 			}
 		}
 		Integer sstatus ;
 		try {
 			sstatus = Integer.parseInt(status);
 		} catch (Exception e) {
-			return new Response(3);
+			return new Response(StatusEnum.stateOf(3));
 		}
 
 		LeaveLetterPo letterPo = new LeaveLetterPo();
@@ -204,9 +207,9 @@ public class LeaveLetterServiceImpl implements LeaveLetterService {
 		Integer ret = letterMapper.count(letterPo);
 		//5 传出数据为空
 		if (ret == null) {
-			return new Response(5);
+			return new Response(StatusEnum.stateOf(5));
 		}
 		System.out.println(ret);
-		return new Response(0).add("count", ret);
+		return new Response(StatusEnum.stateOf(0)).add("count", ret);
 	}
 }

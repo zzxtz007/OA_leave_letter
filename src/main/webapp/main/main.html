@@ -1,147 +1,164 @@
-<!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>主页面</title>
-    <link rel="stylesheet" href="http://cdn.bootcss.com/mdui/0.4.0/css/mdui.min.css">
-    <link rel="stylesheet" href="../css/top-err.css">
-    <link rel="stylesheet" href="../css/main.css">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/main3.css"/>
+
+
 </head>
 <body>
-<div class="top-err">有错误</div>
-<div class="main">
-    <!--侧边导航栏-->
-    <div class="side-nav">
-        <div class="title-menu">
-            <i class="mdui-icon material-icons">&#xe5d2;</i>
-            <div>导航栏</div>
-        </div>
-        <div class="side-function">
-            <ul>
-                <li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe85a;</i>假条管理</li>
-                <li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe0c9;</i>公告发布</li>
-                <li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe85d;</i>公告展示</li>
-                <li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe870;</i>薪水结算</li>
-                <li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe3c9;</i>密码修改</li>
+<div id="box">
+    <div id="logo">
+        <p id="p1">前程科技请假系统 </p>
+    </div>
+    <div id="c1" onclick="myleave()">
+        <p>我要请假</p>
+    </div>
+    <div id="c2" onclick="checkret()">
+        <p>查看结果</p>
+    </div>
+    <div id="content">
+        <p value="1" id="pp">请假人：${user.userName}</p>
+        <div class="demo3">
+            <ul class="inline">
+                <p>开始日：</p>
+                <li class="inline laydate-icon" id="start"
+                    style="width:200px; margin-right:10px;"></li>
+                <p>结束日：
+                <li class="inline laydate-icon" id="end" style="width:200px;"></li>
+                </p>
             </ul>
         </div>
-        <div class="login-out mdui-ripple mdui-ripple-red">
-            退出登录
+        <div id="d1">
+            <p>请假事由：</p>
+            <textarea id="des" cols="40" rows="10"></textarea>
+            <p><input type="button" id="${user.userDept}" value="提交" onclick="submit()"/></p>
         </div>
-    </div>
-    <!--打开侧边导航栏按钮-->
-    <a class="hidden-button"><p class="btn"><i class="mdui-icon material-icons">&#xe5c8;</i></p></a>
-
-    <!--管理假条主界面-->
-    <div class="leave-letter-main">
-        <!--个人请假详细信息-->
-        <div class="detail-message">
-            <div class="detail-message-body">
-                <h1>请假详情</h1>
-                <div class="mdui-table-fluid">
-                    <table class="mdui-table">
-                        <tr>
-                            <td>请假编号</td>
-                            <td class="leave-id"></td>
-                        </tr>
-                        <tr>
-                            <td>员工姓名</td>
-                            <td class="user-name"></td>
-                        </tr>
-                        <tr>
-                            <td>员工部门</td>
-                            <td class="user-department"></td>
-                        </tr>
-                        <tr>
-                            <td>请假时间</td>
-                            <td class="leave-time"></td>
-                        </tr>
-                        <tr>
-                            <td>请假事由</td>
-                            <td class="leave-reson"></td>
-                        </tr>
-                        <tr>
-                            <td>请求时间</td>
-                            <td class="leave-insert-time"></td>
-                        </tr>
-                        <tr>
-                            <td>是否同意</td>
-                            <td>
-                                <label class="mdui-switch">
-                                    <input type="checkbox" id="approve-checkbox"/>
-                                    <i class="mdui-switch-icon"></i>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>反馈</td>
-                            <td>
-                                <div class="mdui-textfield mdui-textfield-floating-label">
-                                    <label class="mdui-textfield-label">feedBack
-                                    </label>
-                                    <textarea class="mdui-textfield-input" type=""></textarea>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <button class="mdui-btn mdui-ripple" id="up-btn">提交</button>
-                                <button class="mdui-btn mdui-ripple close">关闭</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+        <div id="xx">
+            <p><input type="button" id="${user.id}" value=""/></p>
         </div>
-        <!--Tab选项卡-->
-        <div class="mdui-tab mdui-tab-centered mdui-tab-full-width">
-            <a class="mdui-ripple mdui-tab-active" id="tab1">未处理假条</a>
-            <a class="mdui-ripple" id="tab2">已处理假条</a>
-            <div class="mdui-tab-indicator"></div>
-        </div>
-        <!--请假信息-->
-        <div class="leave-letter-message">
-            <div class="mdui-table-fluid">
-                <table class="mdui-table">
-                    <tr>
-                        <td>编号</td>
-                        <td>员工姓名</td>
-                        <td>查看详情</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>徐磊毅</td>
-                        <td>
-                            <a class="a-style"><i class="mdui-icon material-icons"
-                                                  mdui-tooltip="{content: '详情', position: 'top'}">&#xe54b;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>徐磊毅</td>
-                        <td>
-                            <a class=""><i class="mdui-icon material-icons">&#xe54b;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <div class="pick-page-td">
-                                <span class="page-tips">共有99条数据,当前1/8页</span>
-                                <a>首頁</a>
-                                <a>上一頁</a>
-                                <a>下一頁</a>
-                                <a>末頁</a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div id="content1">
+            <table id="table">
+                <tr>
+                    <td>申请人</td>
+                    <td>请假时间</td>
+                    <td>请假事由</td>
+                    <td> 批准人</td>
+                    <td> 状态</td>
+                    <td> 提交时间</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
-<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/mdui/0.4.0/js/mdui.min.js"></script>
-<script src="../js/main.js"></script>
-<script src="../js/check.js"></script>
+<script type="text/javascript" src="../js/jquery3.2.1.js"></script>
+<script type="text/javascript" src="../js/laydate.js"></script>
+<script type="text/javascript">
+    !function () {
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#demo'});//绑定元素
+    }();
+
+    var approver;
+    var id;
+    var id1;
+
+    function myleave() {
+        var c = $("#content");
+        c.css("display", "block")
+    }
+
+    function aaa() {
+        id = $('input[type=button]')[0].id;
+        return $.ajax({
+            url: "getApprover?id=" + id,
+            type: "get"
+        }).done(function (str) {
+            approver = parseInt(str);
+            console.log(approver);
+        });
+    }
+
+    function submit() {
+        aaa().done(function () {
+            id1 = $('input[type=button]')[1].id;
+            var text = $("#des").val();
+            var start = $("#start").text();
+            var end = $("#end").text();
+            var leaveDate = start + "~" + end;
+            $.ajax({
+                url: "addApply",
+                type: "post",
+                data: {
+                    'proposer': id1,
+                    'leaveDate': leaveDate,
+                    'describe': text,
+                    'approver': approver
+                },
+                dataType: 'json',
+                success: function (str) {
+                    var ret = parseInt(str);
+                    if (ret > 0) {
+                        alert("提交成功")
+                    } else {
+                        alert("提交失败")
+
+                    }
+                }
+            })
+        })
+    }
+
+    function checkret() {
+        id2 = $('input[type=button]')[1].id;
+        location.href = "checkret?id=" + id2;
+    }
+
+    //日期范围限制
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD',
+        min: laydate.now(), //设定最小日期为当前日期
+        max: '2099-06-16', //最大日期
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+
+    var end = {
+        elem: '#end',
+        format: 'YYYY-MM-DD',
+        min: laydate.now(),
+        max: '2099-06-16',
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            start.max = datas; //结束日选好后，充值开始日的最大日期
+        }
+    };
+    laydate(start);
+    laydate(end);
+
+    //自定义日期格式
+    laydate({
+        elem: '#test1',
+        format: 'YYYY年MM月DD日',
+        festival: true, //显示节日
+        choose: function (datas) { //选择日期完毕的回调
+            alert('得到：' + datas);
+        }
+    });
+
+    //日期范围限定在昨天到明天
+    laydate({
+        elem: '#hello3',
+        min: laydate.now(-1), //-1代表昨天，-2代表前天，以此类推
+        max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
+    });
+</script>
 </body>
 </html>

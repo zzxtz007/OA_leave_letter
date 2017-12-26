@@ -1,0 +1,133 @@
+*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 700px;
+				height: 650px;
+				margin: 0 auto;
+				background-color: #f8d9d6;
+				position: relative;
+			}
+			#logo{
+				border: 1px solid #e0767a;
+				width: 698px;
+				height: 60px;
+				background-color: #e0767a;
+				margin-bottom: 20px;
+			}
+			#p1{
+				color: white;
+				font-weight: bold;
+				font-size: 25px;
+				align-content: center;
+				line-height: 60px;
+				margin-left: 40px;
+			}
+			#c1{
+				margin-top: 20px;
+				margin: 0 auto;
+				width: 80px;
+				height: 50px;
+				border: 1px solid #dceccf;
+				border-radius: 3px 12px 3px 12px;
+				background-color: #f99593; 
+				margin-bottom: 30px;
+				float: left;
+				margin-left: 80px;
+			}
+			#c1 p{
+				
+				color: white;
+				font-weight: bold;
+				font-size: 15px;
+				text-align: center;
+				line-height: 50px;
+			}
+			#c2{
+				margin-top: 20px;
+				margin: 0 auto;
+				width: 80px;
+				height: 50px;
+				border: 1px solid #dceccf;
+				border-radius: 3px 12px 3px 12px;
+				background-color: #ffb3b3; 
+				float: left;
+				margin-left: 30px;
+			}
+			#c2 p{
+				color: white;
+				font-weight: bold;
+				font-size: 15px;
+				text-align: center;
+				line-height: 50px;
+			}
+			#c2:hover{
+				background-color: #5fc9a5;
+				color: #73baf8;
+				box-show:20px,20px red;
+
+			}
+			#c1:hover{
+				background-color: #5fc9a5;
+				color: #73baf8;
+			}
+			#content{
+				display: none;
+				width: 500px;
+				height: 400px;
+				background-color: #5fc9a5;
+				position: absolute;
+				top: 170px;
+				left: 80px;
+			}
+			ul{
+				margin-left: 10px;
+			}
+			li{
+				list-style:none ;
+				margin-left: 20px;
+				
+				
+			}
+			ul p{
+				margin-top: 10px;
+				
+			}
+			#content p{
+				margin-top: 10px;
+				margin-left: 30px;
+			}
+			textarea{
+				margin-left: 30px;
+				margin-top: 5px;
+			}
+			#d1 input{
+				width: 80px;
+				height: 35px;
+				background-color: #f89da6;
+				color: white;
+				font-weight: bold;
+			}
+			#xx{
+				display: none;
+			}
+			#content1{
+				display: none;
+				width: 665px;
+				height: 460px;
+				background-color: #5fc9a5;
+				position: absolute;
+				top: 170px;
+				left: 20px;
+			}
+			table{
+				width: 630px;
+				height: 430px;
+				margin-left: 20px;
+				margin-top: 15px;
+				margin-bottom: 20px;
+				border: 1px solid #e0767a;
+				border-collapse: collapse;
+			}
+			

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>主页面</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/mdui/0.4.0/css/mdui.min.css">
+	<link rel="stylesheet" href="../css/top-err.css">
+	<link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<div class="top-err">有错误</div>
+<div class="main">
+	<!--侧边导航栏-->
+	<div class="side-nav">
+		<div class="title-menu">
+			<i class="mdui-icon material-icons">&#xe5d2;</i>
+			<div>导航栏</div>
+		</div>
+		<div class="side-function">
+			<ul>
+				<li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe85a;</i>假条管理
+				</li>
+				<li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe0c9;</i>公告发布
+				</li>
+				<li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe85d;</i>公告展示
+				</li>
+				<li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe870;</i>薪水结算
+				</li>
+				<li class="mdui-ripple mdui-ripple-white"><i class="mdui-icon material-icons">&#xe3c9;</i>密码修改
+				</li>
+			</ul>
+		</div>
+		<div class="login-out mdui-ripple mdui-ripple-red">
+			退出登录
+		</div>
+	</div>
+	<!--打开侧边导航栏按钮-->
+	<a class="hidden-button"><p class="btn"><i class="mdui-icon material-icons">&#xe5c8;</i></p></a>
+
+	<!--管理假条主界面-->
+	<div class="leave-letter-main">
+		<!--个人请假详细信息-->
+		<div class="detail-message">
+			<div class="detail-message-body">
+				<h1>请假详情</h1>
+				<div class="mdui-table-fluid">
+					<table class="mdui-table">
+						<tr>
+							<td>请假编号</td>
+							<td class="leave-id"></td>
+						</tr>
+						<tr>
+							<td>员工姓名</td>
+							<td class="user-name"></td>
+						</tr>
+						<tr>
+							<td>员工部门</td>
+							<td class="user-department"></td>
+						</tr>
+						<tr>
+							<td>请假时间</td>
+							<td class="leave-time"></td>
+						</tr>
+						<tr>
+							<td>请假事由</td>
+							<td class="leave-reson"></td>
+						</tr>
+						<tr>
+							<td>请求时间</td>
+							<td class="leave-insert-time"></td>
+						</tr>
+						<tr>
+							<td>是否同意</td>
+							<td>
+								<label class="mdui-switch">
+									<input type="checkbox" id="approve-checkbox"/>
+									<i class="mdui-switch-icon"></i>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>反馈</td>
+							<td>
+								<div class="mdui-textfield mdui-textfield-floating-label">
+									<label class="mdui-textfield-label">feedBack
+									</label>
+									<textarea class="mdui-textfield-input" type=""></textarea>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button class="mdui-btn mdui-ripple" id="up-btn">提交</button>
+								<button class="mdui-btn mdui-ripple close">关闭</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--Tab选项卡-->
+		<div class="mdui-tab mdui-tab-centered mdui-tab-full-width">
+			<a class="mdui-ripple mdui-tab-active" id="tab1">未处理假条</a>
+			<a class="mdui-ripple" id="tab2">已处理假条</a>
+			<div class="mdui-tab-indicator"></div>
+		</div>
+		<!--请假信息-->
+		<div class="leave-letter-message">
+			<div class="mdui-table-fluid">
+				<table class="mdui-table">
+					<tr>
+						<td>编号</td>
+						<td>员工姓名</td>
+						<td>查看详情</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>徐磊毅</td>
+						<td>
+							<a class="a-style"><i class="mdui-icon material-icons"
+							                      mdui-tooltip="{content: '详情', position: 'top'}">&#xe54b;</i></a>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>徐磊毅</td>
+						<td>
+							<a class=""><i class="mdui-icon material-icons">&#xe54b;</i></a>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<div class="pick-page-td">
+								<span class="page-tips">共有99条数据,当前1/8页</span>
+								<a>首頁</a>
+								<a>上一頁</a>
+								<a>下一頁</a>
+								<a>末頁</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/mdui/0.4.0/js/mdui.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/check.js"></script>
+</body>
+</html>

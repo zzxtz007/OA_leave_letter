@@ -7,7 +7,7 @@ function load(e) {
     e.preventDefault();
     if (userFlag === true && pwdFlag === true) {
         $.ajax({
-            url: '../api/user/login',
+            url: '/fuck/api/user/login',
             type: 'GET',
             data: {
                 userName: $('.userName').val(),
@@ -16,15 +16,17 @@ function load(e) {
         })
             .done(function (Response) {
                 'use strict';
+                console.log(Response);
                 switch (Response.status) {
-                    case 0:
+                    case 'SUCCESS':
                         topErrMethod('#0f0', '登录成功');
                         setTimeout(function () {
-                            location.href = '../main/main.html';
+                            if ()
+                            location.href = '/fuck/main/main.html';
                         }, 1000);
                         break;
-                    case 2:
-                        topErrMethod('#f00', '别瞎传值');
+                    case 'PWD_ERROR':
+                        topErrMethod('#f00', '账号或密码错误');
                         break;
                 }
             })

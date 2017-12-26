@@ -53,6 +53,7 @@ function select() {
     })
         .done(function (Response) {
             'use strict';
+            console.log(Response);
             switch (Response.status) {
                 case 0:
                     addMessage(Response);
